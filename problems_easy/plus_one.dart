@@ -1,53 +1,35 @@
 class Solution {
   List<int> plusOne(List<int> digits) {
-    int endIndex = digits.length - 1;
-    int sumDigits = 0;
-    int number =  1;
-    int decrementNumber = 0;
-    bool isDecrementNumber = true;
-
-    while(endIndex>=0){
-      if(digits[endIndex] == 0) {
-        sumDigits += number;
-        decrementNumber += number;
-        number = number * 10;
-      }
-      else{
-        sumDigits += digits[endIndex] * number;
-        number = number * 10;
-        isDecrementNumber = false;
-      }
-      endIndex--;
-
-    }
-    sumDigits = sumDigits - decrementNumber;
-    sumDigits++;
-    print(sumDigits);
-    if(sumDigits <10){
-      return [sumDigits];
-    }
-    if (sumDigits > 10) number = number ~/ 10;
-    print(number);
+    int tempNumber = 0;
+    int len = digits.length;
+    bool isAdd = true;
     List<int> result = [];
-    while(number>=1){
-      int singleDigite = sumDigits ~/ number;
-      if (singleDigite == 10){
-        result.add(1);
-        result.add(0);
-        sumDigits -= number * singleDigite;
-        number = number ~/ 10;
+    for(int i = len -1; i >= 0; i--){
+
+      if(isAdd){
+        int sum = digits[i] + 1;
+        if(sum == 10){
+          result.insert(0, 0);
+          tempNumber = 1;
+        }else{
+          result.insert(0, sum);
+          tempNumber = 0;
+          isAdd = false;
+        }
       }else{
-        result.add(singleDigite);
-        sumDigits -= number * singleDigite;
-        number = number ~/ 10;
+        isAdd = false;
+        result.insert(0, digits[i]);
       }
+    }
+
+    if(isAdd){
+      result.insert(0, tempNumber);
     }
     return result;
   }
 }
-
 void main(){
   Solution obj = Solution();
-  List<int> result = obj.plusOne([6,1,4,5,3,9,0,1,9,5,1,8,6,7,0,5,5,4]);
+  List<int> result = obj.plusOne([1,2,4]);
   print(result);
 }
