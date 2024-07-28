@@ -1,29 +1,26 @@
 class Solution {
   void merge(List<int> nums1, int m, List<int> nums2, int n) {
-    if (m == 0) {
-      nums1 = nums2;
-    } else {
-      for (int i = 0; i < n; i++) {
-        int temp = 0;
-        for (int j = 1; j < m + n; j++) {
-          if (nums1[j] > nums2[i] && nums1[j - 1] <= nums2[i]) {
-            temp = nums1[j];
-            nums1[j] = nums2[i];
-          } else if (nums1[j] == 0) {
-            nums1[j] = temp != 0 ? temp : nums2[i];
-            break;
-          } else {
-            if (temp != 0) {
-              int nTemp = nums1[j];
-              nums1[j] = temp;
-              temp = nTemp;
-            }
-          }
-        }
+    if (n == 0) {
+      return;
+    }
+    int last_index = m+n - 1;
+    while(n > 0 && m > 0){
+      if(nums1[m-1] > nums2[n-1]){
+        nums1[last_index] = nums1[m-1];
+        m--;
+      }else{
+        nums1[last_index] = nums2[n-1];
+        n--;
       }
+      last_index--;
     }
 
-    print(nums1);
+    while(n > 0){
+      nums1[last_index] = nums2[n-1];
+      n--;
+      last_index--;
+    }
+
   }
 }
 
