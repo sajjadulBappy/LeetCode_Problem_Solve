@@ -2,13 +2,12 @@ import 'dart:io';
 
 void main() {
   // Write your dart code from here
-  String? input1 = stdin.readLineSync();
-  String? input2 = stdin.readLineSync();
-  String? input3 = stdin.readLineSync();
+  String? input = stdin.readLineSync();
+  List<String>? inputs = input?.split(' ');
 
-  int? wheels = int.tryParse(input1 ?? "");
-  int? carBody = int.tryParse(input2 ?? "");
-  int? figures = int.tryParse(input3 ?? "");
+  int? wheels = int.tryParse(inputs![0]);
+  int? carBody = int.tryParse(inputs[1]);
+  int? figures = int.tryParse(inputs[2]);
 
   wheels = (wheels! ~/ 4);
   figures = (figures! ~/ 2);
